@@ -1,0 +1,100 @@
+# Top-level section that defines all services (containers) to run
+services:
+
+  # -------------------- CATALOGUE SERVICE --------------------
+  catalogue:
+    image: catalogue:v1              # Docker image used to create the catalogue container
+    container_name: catalogue        # Custom name for the container instead of random Docker name
+    depends_on:                      # Ensures dependent containers start before this one
+    - mongodb                        # Catalogue needs MongoDB database to start
+
+  # -------------------- MONGODB SERVICE ----------------------
+  mongodb:
+    image: mongodb:v1                # Docker image for MongoDB
+    container_name: mongodb          # Name of the MongoDB container
+    volumes:                         # Attach a persistent volume so data is not lost on restart
+      - mongodb:/data/db             # HOST VOLUME (mongodb) → CONTAINER DIRECTORY (/data/db)
+
+  # -------------------- REDIS SERVICE ------------------------
+  redis:
+    image: redis:7.0                 # Official Redis image version 7.0
+    container_name: redis            # Custom name for Redis container
+    volumes:
+      - redis:/data                  # HOST VOLUME (redis) → CONTAINER DIRECTORY (/data)
+
+  # -------------------- MYSQL SERVICE ------------------------
+  mysql:
+    image: mysql:v1                  # Custom MySQL database image
+    container_name: mysql            # Name of MySQL container
+    volumes:
+      - mysql:/var/lib/mysql         # HOST VOLUME (mysql) → CONTAINER DIRECTORY (/var/lib/mysql)
+
+  # -------------------- RABBITMQ SERVICE ---------------------
+  rabbitmq:
+    image: rabbitmq:3                # RabbitMQ message broker image
+    container_name: rabbitmq         # Name of RabbitMQ container
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq   # HOST VOLUME (rabbitmq) → RabbitMQ internal data directory
+    environment:                     # Environment variables passed to container
+      RABBITMQ_DEFAULT_USER: roboshop    # Sets default username inside RabbitMQ
+      RABBITMQ_DEFAULT_PASS: roboshop123 # Sets default password inside RabbitMQ
+
+  # -------------------- USER SERVICE -------------------------
+  user:
+    image: user:v1                   # User microservice image
+    container_name: user             # User service container name
+    depends_on:                      # Defines startup order
+    - mongodb                        # User service requires MongoDB
+    - redis                          # User service also uses Redis
+
+  # -------------------- CART SERVICE -------------------------
+  cart:
+    image: cart:v1                   # Cart microservice image
+    container_name: cart             # Container name for cart service
+    depends_on:
+    - redis                          # Cart stores session/cart data in Redis
+    - catalogue                      # Cart interacts with catalogue service
+
+  # -------------------- SHIPPING SERVICE ---------------------
+  shipping:
+    image: shipping:v1               # Shipping service image
+    container_name: shipping         # Name of shipping container
+    depends_on:
+    - mysql                          # Shipping relies on MySQL database
+    - cart                           # Shipping interacts with cart
+
+  # -------------------- PAYMENT SERVICE ----------------------
+  payment:
+    image: payment:v1                # Payment microservice image
+    container_name: payment          # Name of payment container
+    depends_on:
+    - rabbitmq                       # Payment uses RabbitMQ message queue
+    - cart                           # Payment needs cart service
+    - user                           # Payment needs user service
+
+  # -------------------- FRONTEND SERVICE ---------------------
+  frontend:
+    image: frontend:v1               # Frontend service image
+    container_name: frontend         # Name of frontend container
+    ports:
+      - "80:80"                      # HOST PORT 80 → CONTAINER PORT 80 (exposes service publicly)
+    depends_on:
+    - catalogue                      # Frontend calls catalogue APIs
+    - user                           # Frontend calls user APIs
+    - cart                           # Frontend calls cart APIs
+    - shipping                       # Frontend calls shipping APIs
+    - payment                        # Frontend calls payment APIs
+
+# -------------------- NETWORK CONFIGURATION --------------------
+networks:
+  default:                           # Default network for all services
+    driver: bridge                   # Uses Docker's bridge network driver
+    name: roboshop                   # Custom network name instead of random name
+    external: false                  # false = auto-create network; true = manually created network
+
+# -------------------- VOLUME DECLARATIONS ---------------------
+volumes:
+  mongodb:                           # HOST volume stored at /var/lib/docker/volumes/mongodb/_data
+  redis:                             # HOST volume stored at /var/lib/docker/volumes/redis/_data
+  mysql:                             # HOST volume stored at /var/lib/docker/volumes/mysql/_data
+  rabbitmq:                          # HOST volume stored at /var/lib/docker/volumes/rabbitmq/_data
