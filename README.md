@@ -120,7 +120,7 @@ frontend ───▶ payment ──────▶ cart
 Run this automation loop:
 
 ```bash
-for i in mongodb mysql catalogue user cart shipping payment frontend; do
+for i in mongodb mysql catalogue user cart shipping payment redis rabbitmq frontend; do
   cd $i
   docker build -t $i:v1 .
   cd ..
