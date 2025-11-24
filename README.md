@@ -1,23 +1,4 @@
-# 🚀 ROBOSHOP MICROSERVICES – COMPLETE DEVOPS DOCUMENTATION
-
-
-
-
-This is the **ultimate, full-featured, production-ready documentation** for the Roboshop microservices architecture.
-
-It includes:
-
-✅ Architecture Diagrams  
-✅ Build & Run Commands  
-✅ Docker Compose Deep-Dive  
-✅ Stateful vs Stateless  
-✅ Volumes & Networks  
-✅ Multi-Stage Builds  
-✅ Best Practices  
-✅ Testing Guide  
-✅ Troubleshooting  
-✅ Full Microservice Flow  
-✅ Everything required for GitHub, Interviews & Real Projects  
+# 🚀 ROBOSHOP MICROSERVICES – DOCKER
 
 ---
 
