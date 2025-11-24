@@ -204,6 +204,108 @@ Example:
 
 ---
 
+
+
+# 1️⃣2️⃣ TESTING GUIDE
+
+### Test frontend:
+```
+curl http://<EC2-IP>
+```
+
+### Test backend API:
+```
+curl http://<EC2-IP>/catalogue
+curl http://<EC2-IP>/user
+curl http://<EC2-IP>/cart
+```
+
+### Check logs:
+```
+docker logs <container> -f
+```
+
+---
+
+# 1️⃣3️⃣ TROUBLESHOOTING
+
+### Container restarting?
+```
+docker logs <container>
+```
+
+### Port already in use?
+```
+sudo lsof -i :80
+```
+
+### Volume not persisting?
+```
+docker volume inspect mongodb
+```
+
+### Network issues?
+```
+docker network inspect roboshop
+```
+
+### Image build failed?
+```
+docker build --no-cache .
+```
+
+---
+
+# 🚀 How to Deploy
+
+```
+docker compose up -d
+docker compose ps
+docker network inspect roboshop
+docker volume ls
+```
+
+---
+
+# 🧪 How to Test
+
+```
+curl http://<EC2-IP>
+curl http://<EC2-IP>/catalogue
+curl http://<EC2-IP>/user
+```
+
+---
+
+# 🛠 Logs
+
+```
+docker logs frontend -f
+docker logs catalogue -f
+docker logs user -f
+```
+
+---
+
+# 🚑 Troubleshooting
+
+### ❌ Container restarts?
+```
+docker logs <container>
+```
+
+### ❌ Port already in use?
+```
+sudo lsof -i :80
+```
+
+### ❌ Volume not persisting?
+```
+docker volume inspect mongodb
+```
+
+---
+
 ---------------------------------------------------------------------
 # 🔥  DOCKER COMPOSE EXPLANATION 
 ---------------------------------------------------------------------
@@ -310,107 +412,6 @@ volumes:
   redis:                                 # Host volume 2
   mysql:                                 # Host volume 3
   rabbitmq:                              # Host volume 4
-```
-
----
-
-# 1️⃣2️⃣ TESTING GUIDE
-
-### Test frontend:
-```
-curl http://<EC2-IP>
-```
-
-### Test backend API:
-```
-curl http://<EC2-IP>/catalogue
-curl http://<EC2-IP>/user
-curl http://<EC2-IP>/cart
-```
-
-### Check logs:
-```
-docker logs <container> -f
-```
-
----
-
-# 1️⃣3️⃣ TROUBLESHOOTING
-
-### Container restarting?
-```
-docker logs <container>
-```
-
-### Port already in use?
-```
-sudo lsof -i :80
-```
-
-### Volume not persisting?
-```
-docker volume inspect mongodb
-```
-
-### Network issues?
-```
-docker network inspect roboshop
-```
-
-### Image build failed?
-```
-docker build --no-cache .
-```
-
----
-
-
-# 🚀 How to Deploy
-
-```
-docker compose up -d
-docker compose ps
-docker network inspect roboshop
-docker volume ls
-```
-
----
-
-# 🧪 How to Test
-
-```
-curl http://<EC2-IP>
-curl http://<EC2-IP>/catalogue
-curl http://<EC2-IP>/user
-```
-
----
-
-# 🛠 Logs
-
-```
-docker logs frontend -f
-docker logs catalogue -f
-docker logs user -f
-```
-
----
-
-# 🚑 Troubleshooting
-
-### ❌ Container restarts?
-```
-docker logs <container>
-```
-
-### ❌ Port already in use?
-```
-sudo lsof -i :80
-```
-
-### ❌ Volume not persisting?
-```
-docker volume inspect mongodb
 ```
 
 ---
