@@ -193,12 +193,15 @@ Example:
 
 ✔ Use small base images (Alpine)  
 ✔ Use multi-stage builds  
+✔ use volumes and custom networks
+✔ Use labels and expose 
+✔ Optimize layers 
 ✔ Use `.dockerignore`  
-✔ Don’t store secrets inside images  
-✔ Avoid root user  
-✔ Optimize layers  
+✔ Don’t store secrets inside images 
+✔ use entrypoint and cmd 
+✔ Avoid root user    
 ✔ Use volumes for persistent storage  
-✔ Use labels and expose  
+
 
 ---
 
