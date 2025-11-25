@@ -214,7 +214,9 @@ Example:
 ✔ Limit the resources and perform health checks
 
 ✔  Optimise layering:
+
 	  ✔  Reduce number of layers, frequently changing instruction should be at last
+
 
 	  ✔ Combine multiple instructions into single instruction, that speeds up the build prcess
 ---
