@@ -1,4 +1,5 @@
-# Top-level section that defines all services (containers) to run
+# Top-level section that defines all services (containers) to run 
+
 services:
 
   # -------------------- CATALOGUE SERVICE --------------------
