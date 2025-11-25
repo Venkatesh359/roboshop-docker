@@ -192,16 +192,31 @@ Example:
 # 1️⃣1️⃣ DOCKER IMAGE OPTIMIZATION BEST PRACTICES
 
 ✔ Use small base images (Alpine)  
-✔ Use multi-stage builds  
+
+✔ Use multi-stage builds
+
 ✔ use volumes and custom networks
+
 ✔ Use labels and expose 
+
 ✔ Optimize layers 
+
 ✔ Use `.dockerignore`  
+
 ✔ Don’t store secrets inside images 
+
 ✔ use entrypoint and cmd 
-✔ Avoid root user    
+
+✔ Avoid root user 
+
 ✔ Use volumes for persistent storage  
 
+✔ Limit the resources and perform health checks
+
+✔  Optimise layering:
+	  ✔  Reduce number of layers, frequently changing instruction should be at last
+
+	  ✔ Combine multiple instructions into single instruction, that speeds up the build prcess
 ---
 
 
