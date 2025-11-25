@@ -23,14 +23,14 @@ services:
     volumes:
       - redis:/data                  # HOST VOLUME (redis) → CONTAINER DIRECTORY (/data)
 
-  # -------------------- MYSQL SERVICE ------------------------
+  # -------------------- MYSQL SERVICE  ------------------------
   mysql:
     image: mysql:v1                  # Custom MySQL database image
     container_name: mysql            # Name of MySQL container
     volumes:
       - mysql:/var/lib/mysql         # HOST VOLUME (mysql) → CONTAINER DIRECTORY (/var/lib/mysql)
 
-  # -------------------- RABBITMQ SERVICE ---------------------
+  # -------------------- RABBITMQ SERVICE  ---------------------
   rabbitmq:
     image: rabbitmq:3                # RabbitMQ message broker image
     container_name: rabbitmq         # Name of RabbitMQ container
