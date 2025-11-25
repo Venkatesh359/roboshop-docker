@@ -215,10 +215,10 @@ Example:
 
 ✔  Optimise layering:
 
-	  ✔  Reduce number of layers, frequently changing instruction should be at last
+	✔  Reduce number of layers, frequently changing instruction should be at last
 
 
-	  ✔ Combine multiple instructions into single instruction, that speeds up the build prcess
+	✔ Combine multiple instructions into single instruction, that speeds up the build prcess
 ---
 
 
