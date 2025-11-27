@@ -153,6 +153,22 @@ Docker Compose allows:
 - Manage service dependencies  
 - Maintain startup order  
 
+
+build all services:
+```
+docker compose build
+```
+
+Build specific services (optional):
+```
+docker compose build <service_name>
+```
+
+Force rebuilding:
+```
+docker compose build --no-cache
+```
+
 Start all services:
 ```
 docker compose up -d
