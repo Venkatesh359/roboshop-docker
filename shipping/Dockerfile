@@ -1,3 +1,7 @@
+# -------------------------------
+# STAGE 1: Build Stage
+# -------------------------------
+
 FROM maven:3.9.11 AS builder
 WORKDIR /opt/server
 COPY pom.xml .
@@ -5,6 +9,10 @@ COPY src ./src
 RUN mvn clean package && \
     mv target/shipping-1.0.jar shipping.jar
 
+
+# -------------------------------
+# STAGE 2: Runtime Stage
+# -------------------------------
 
 FROM eclipse-temurin:17-jre-alpine
 EXPOSE 8080
@@ -14,6 +22,8 @@ ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
 COPY --from=builder --chown=roboshop:roboshop /opt/server/shipping.jar .
 USER roboshop
+
+#This ENTRYPOINT waits 30 seconds, then starts the Java app
 ENTRYPOINT ["sh", "-c", "sleep 30 && java -jar shipping.jar"]
 
 

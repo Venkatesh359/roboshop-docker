@@ -1,3 +1,7 @@
+# -------------------------------
+# STAGE 1: Build Stage
+# -------------------------------
+
 FROM node:20.19.5-alpine3.21 AS build
 WORKDIR /opt/server
 COPY package.json .
@@ -5,6 +9,10 @@ COPY *.js .
 # this may add extra cache memory
 RUN npm install 
 
+
+# -------------------------------
+# STAGE 2: Runtime Stage
+# -------------------------------
 
 FROM node:20.19.5-alpine3.21
 # Create a group and user
