@@ -1,0 +1,51 @@
+
+services:
+  mongodb:
+    build:
+      context: ./mongodb
+    image: mongodb:v1
+
+  mysql:
+    build:
+      context: ./mysql
+    image: mysql:v1
+
+  redis:
+    build:
+      context: ./redis
+    image: redis:v1
+
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+    image: rabbitmq:v1
+
+  catalogue:
+    build:
+      context: ./catalogue
+    image: catalogue:v1
+
+  user:
+    build:
+      context: ./user
+    image: user:v1
+
+  cart:
+    build:
+      context: ./cart
+    image: cart:v1
+
+  shipping:
+    build:
+      context: ./shipping
+    image: shipping:v1
+
+  payment:
+    build:
+      context: ./payment
+    image: payment:v1
+
+  frontend:
+    build:
+      context: ./frontend
+    image: frontend:v1
