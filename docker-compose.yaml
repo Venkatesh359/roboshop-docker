@@ -15,7 +15,7 @@ services:
     - mongodb:/data/db
   redis:
     build: ./redis
-    image: venkatesh990/ redis:7.0
+    image: venkatesh990/redis:7.0
     container_name: redis
     volumes:
     - redis:/data
