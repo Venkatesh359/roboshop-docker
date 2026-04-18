@@ -6,31 +6,32 @@ services:
     image: venkatesh990/catalogue:v1
     container_name: catalogue
     depends_on:
-    - mongodb
+      - mongodb
   mongodb:
     build: ./mongodb
-    image:  venkatesh990/mongodb:v1
+    image: venkatesh990/mongodb:v1
     container_name: mongodb
     volumes:
-    - mongodb:/data/db
+      - mongodb:/data/db
   redis:
     build: ./redis
     image: venkatesh990/redis:7.0
     container_name: redis
     volumes:
-    - redis:/data
+      - redis:/data
   mysql:
     build: ./mysql
-    image: venkatesh990/mysql:v1
+    image: venkatesh990/mysql:v2
     container_name: mysql
     volumes:
-    - mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
   rabbitmq:
     build: ./rabbitmq
     image: rabbitmq:3
     container_name: rabbitmq
-    volumes: # -v rabbitmq:/var/lib/rabbitmq
-    - rabbitmq:/var/lib/rabbitmq
+    volumes:
+      # -v rabbitmq:/var/lib/rabbitmq
+      - rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
@@ -39,42 +40,42 @@ services:
     image: venkatesh990/user:v1
     container_name: user
     depends_on:
-    - mongodb
-    - redis
+      - mongodb
+      - redis
   cart:
     build: ./cart
     image: venkatesh990/cart:v1
     container_name: cart
     depends_on:
-    - redis
-    - catalogue
+      - redis
+      - catalogue
   shipping:
     build: ./shipping
     image: venkatesh990/shipping:v1
     container_name: shipping
     depends_on:
-    - mysql
-    - cart
+      - mysql
+      - cart
   payment:
     build: ./payment
     image: venkatesh990/payment:v1
     container_name: payment
     depends_on:
-    - rabbitmq
-    - cart
-    - user
+      - rabbitmq
+      - cart
+      - user
   frontend:
     build: ./frontend
     image: venkatesh990/frontend:v1
     container_name: frontend
     ports:
-    - "80:80"
+      - "80:80"
     depends_on:
-    - catalogue
-    - user
-    - cart
-    - shipping
-    - payment
+      - catalogue
+      - user
+      - cart
+      - shipping
+      - payment
 networks:
   default:
     driver: bridge
@@ -82,7 +83,7 @@ networks:
     external: false # true if you have created network manually using docker network command
 volumes:
   # docker volume create mongodb. /var/lib/docker/volumes
-  mongodb: 
+  mongodb:
     name: mongodb
   mysql:
     name: mysql
