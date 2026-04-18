@@ -246,7 +246,7 @@ Example:
 # 1️⃣2️⃣ TESTING GUIDE
 
 ### Test frontend:
-```
+```bash
 curl http://<EC2-IP>
 ```
 
@@ -258,31 +258,44 @@ curl http://<EC2-IP>/cart
 ```
 
 ### Check logs:
-```
+```bash
 docker logs <container> -f
 ```
 
 ### Container restarting?
-```
+```bash
 docker logs <container>
 ```
 
-### Volume not persisting?
+## Remove Containers
+``` bash
+docker rm -f `docker ps -a -q`
 ```
+
+
+## Remove images
+``` bash
+docker rmi -f `docker images -a -q`
+```
+
+
+### Volume not persisting?
+```bash
 docker volume inspect mongodb
 ```
 
 ### Network issues?
-```
+```bash
 docker network inspect roboshop
 ```
 
 ### Image build failed?
-```
+```bash
 docker build --no-cache .
 ```
+
 ### ❌ Volume not persisting?
-```
+```bash
 docker volume inspect mongodb
 ```
 ---
