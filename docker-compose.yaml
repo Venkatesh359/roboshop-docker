@@ -25,6 +25,7 @@ services:
     container_name: mysql
     volumes:
       - mysql:/var/lib/mysql
+      - ./mysql-root-password.txt:/tmp/mysql-root-password.txt
   rabbitmq:
     build: ./rabbitmq
     image: rabbitmq:3

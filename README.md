@@ -157,6 +157,7 @@ Docker Compose allows:
 build all services:
 ```
 docker compose build
+
 ```
 
 Build specific services (optional):
@@ -265,11 +266,6 @@ docker logs <container> -f
 ### Container restarting?
 ```
 docker logs <container>
-```
-
-### Port already in use?
-```
-sudo lsof -i :80
 ```
 
 ### Volume not persisting?
