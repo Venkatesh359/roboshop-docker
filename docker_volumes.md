@@ -19,21 +19,41 @@ Volumes created and fully managed by Docker.
 Reliable, safe, and best for production.
 
 ### ✔️ Create a named volume
+
 ```bash
-docker volume create mydata
+docker volume create mydata :==> vloume name mydata
+
 ```
 
 ### ✔️ Use in a container
+
 ```bash
+
 docker run -d -v mydata:/var/lib/mysql mysql
+
+
+What this does
+   -d → runs container in background (detached mode)
+
+   -v mydata:/var/lib/mysql → creates & mounts a named volume
+
+     mydata → volume managed by Docker
+
+    /var/lib/mysql → MySQL’s internal data directory
+
+   mysql → official MySQL image
+
 ```
 
 ### ✔️ Host location
+
 ```
 /var/lib/docker/volumes/mydata/_data
+
 ```
 
 ### ⭐ Best for:
+
 - Databases (MySQL, MongoDB, Redis)
 - Long‑term persistent data  
 
@@ -65,14 +85,32 @@ Anonymous volume path example:
 
 ---
 
-## 🔹 **C. Bind Mounts**
+## 🔹 **C. Bind Mounts or Un named volumes**
 
 ### ✔️ Description  
 Mount a **specific host directory** into the container.
 
 ### Example
+
 ```bash
-docker run -v /home/venkatesh/app:/usr/src/app node
+docker run -v /home/ec2-user/nginx_html:/usr/share/nginx/html nginx
+
+  docker run → starts a container
+
+  -v /home/ec2-user/nginx_html:/usr/share/nginx/html → mounts a volume
+
+  Left side (host): /home/ec2-user/nginx_html (your manually created folder)
+
+  Right side (container): /usr/share/nginx/html (default Nginx web root inside container)
+
+  nginx → uses the official Nginx image
+
+
+  Create a sample HTML file:
+  echo "Hello from Docker Nginx" > /home/ec2-user/nginx_html/index.html
+
+  docker run -p 8080:80 -v /home/ec2-user/nginx_html:/usr/share/nginx/html nginx
+
 ```
 
 ### ⭐ Best for:
