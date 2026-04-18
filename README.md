@@ -15,9 +15,8 @@
 9. Stateful vs Stateless  
 10. Multi-Stage Builds  
 11. Docker Optimization Best Practices  
-12. Testing Guide  
-13. Troubleshooting Guide  
-14. Full docker-compose.yml (Explained)  
+12. Testing & Troubleshooting Guide  
+14. Full docker-compose.yml   
 
 ---
 
@@ -140,7 +139,11 @@ docker network create roboshop
 ```
 docker run -d -p 80:80 --name frontend --network roboshop frontend:v1
 ```
+For MySQl please make sure password exits in directory
 
+```bash
+echo "RoboShop@1" > mysql-root-password.txt
+```
 ---
 
 # 8️⃣ DOCKER COMPOSE — FULL EXPLANATION
@@ -259,10 +262,6 @@ curl http://<EC2-IP>/cart
 docker logs <container> -f
 ```
 
----
-
-# 1️⃣3️⃣ TROUBLESHOOTING
-
 ### Container restarting?
 ```
 docker logs <container>
@@ -282,7 +281,10 @@ docker network inspect roboshop
 ```
 docker build --no-cache .
 ```
-
+### ❌ Volume not persisting?
+```
+docker volume inspect mongodb
+```
 ---
 
 # 🚀 How to Deploy
@@ -296,16 +298,6 @@ docker volume ls
 
 ---
 
-# 🧪 How to Test
-
-```
-curl http://<EC2-IP>
-curl http://<EC2-IP>/catalogue
-curl http://<EC2-IP>/user
-```
-
----
-
 # 🛠 Logs
 
 ```
@@ -313,25 +305,7 @@ docker logs frontend -f
 docker logs catalogue -f
 docker logs user -f
 ```
-
 ---
-
-# 🚑 Troubleshooting
-
-### ❌ Container restarts?
-```
-docker logs <container>
-```
-
-### ❌ Port already in use?
-```
-sudo lsof -i :80
-```
-
-### ❌ Volume not persisting?
-```
-docker volume inspect mongodb
-```
 ---------------------------------------------------------------------
 # 🔥  DOCKER COMPOSE EXPLANATION 
 ---------------------------------------------------------------------
